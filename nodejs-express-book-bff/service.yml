@@ -1,0 +1,16 @@
+
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: book-bff
+    namespace: book-service-app
+    labels:
+      app: book-bff-app
+  spec:
+    type: LoadBalancer
+    selector:
+      app: book-bff-app
+    ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 80

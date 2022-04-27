@@ -1,0 +1,35 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: crm-service-deployment
+    namespace: crm-service-app
+    labels:
+      app: crm-service-app
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: crm-service-app
+    template:
+      metadata:
+        labels:
+          app: crm-service-app
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+                        - arm64
+        containers:
+          - name: crmapi
+            image: public.ecr.aws/o0j8b8u8/diss-a3-ecr:crmapi
+            ports:
+              - containerPort: 3000
+            imagePullPolicy: IfNotPresent
+        nodeSelector:
+          kubernetes.io/os: linux

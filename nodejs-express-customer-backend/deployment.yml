@@ -1,0 +1,35 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: customer-service-deployment
+    namespace: customer-service-app
+    labels:
+      app: customer-service-app
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: customer-service-app
+    template:
+      metadata:
+        labels:
+          app: customer-service-app
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+                        - arm64
+        containers:
+          - name: customerapi
+            image: public.ecr.aws/o0j8b8u8/diss-a3-ecr:customerapi
+            ports:
+              - containerPort: 3000
+            imagePullPolicy: IfNotPresent
+        nodeSelector:
+          kubernetes.io/os: linux

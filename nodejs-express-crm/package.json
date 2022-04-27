@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-express-crm",
+  "version": "1.0.0",
+  "description": "nodejs kafka consumer",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "kafka",
+    "consumer",
+    "crm"
+  ],
+  "author": "amithesr",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1120.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "kafkajs": "^1.16.0",
+    "mysql": "^2.18.1"
+  }
+}

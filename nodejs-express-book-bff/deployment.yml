@@ -1,0 +1,36 @@
+
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: book-bff-deployment
+    namespace: book-service-app
+    labels:
+      app: book-bff-app
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: book-bff-app
+    template:
+      metadata:
+        labels:
+          app: book-bff-app
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+                        - arm64
+        containers:
+          - name: booksbff
+            image: public.ecr.aws/p1a4u2w8/booksbff
+            ports:
+              - containerPort: 80
+            imagePullPolicy: IfNotPresent
+        nodeSelector:
+          kubernetes.io/os: linux
