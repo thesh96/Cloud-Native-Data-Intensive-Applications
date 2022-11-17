@@ -26,8 +26,8 @@
                         - amd64
                         - arm64
         containers:
-          - name: booksapi
-            image: public.ecr.aws/o0j8b8u8/diss-a3-ecr:bookapi
+          - name: bookapi
+            image: public.ecr.aws/o0j8b8u8/diss-a3:bookapi
             ports:
               - containerPort: 3000
             imagePullPolicy: IfNotPresent

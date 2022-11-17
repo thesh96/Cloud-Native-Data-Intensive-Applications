@@ -5,7 +5,7 @@ const kafkaProducer = function() {
 
 const kafka = new Kafka({
     clientId: 'customer-events',
-    brokers: ['b-1.diss-a3-mskcluster.6unmre.c7.kafka.us-east-2.amazonaws.com:9092','b-2.diss-a3-mskcluster.6unmre.c7.kafka.us-east-2.amazonaws.com:9092','b-3.diss-a3-mskcluster.6unmre.c7.kafka.us-east-2.amazonaws.com:9092']
+    brokers: ['b-1.diss-a3-mskcluster.tekzbc.c23.kafka.us-east-1.amazonaws.com:9092','b-3.diss-a3-mskcluster.tekzbc.c23.kafka.us-east-1.amazonaws.com:9092','b-2.diss-a3-mskcluster.tekzbc.c23.kafka.us-east-1.amazonaws.com:9092']
 })
 
 const producer = kafka.producer()

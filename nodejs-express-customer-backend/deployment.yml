@@ -27,7 +27,7 @@
                         - arm64
         containers:
           - name: customerapi
-            image: public.ecr.aws/o0j8b8u8/diss-a3-ecr:customerapi
+            image: public.ecr.aws/o0j8b8u8/diss-a3:customerapi
             ports:
               - containerPort: 3000
             imagePullPolicy: IfNotPresent

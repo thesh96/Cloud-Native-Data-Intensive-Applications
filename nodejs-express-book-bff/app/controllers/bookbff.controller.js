@@ -1,7 +1,7 @@
 const axios = require('axios');
 const jwtDecoder = require('jwt-decode');
 const ip = 'http://book-service:3000/books'
-
+//const ip = 'http://localhost:3000/books'
 exports.create = (req, res) => {
 
     async function makePostRequest() {
@@ -84,6 +84,11 @@ exports.retrieve = (req, res) => {
             delete data.code;
             res.status(code).send(data);
         } else {
+            if (req.headers["user-agent"].includes("Mobile")) {
+                if (data.genre == 'non-fiction' || data.genre == 'non fiction' ) {
+                    data.genre = 3;
+                }
+            }
             res.status(200).send(data);
         }
 
@@ -114,17 +119,22 @@ exports.retrieveisbn = (req, res) => {
     async function makeGetRequest() {
         const resp = await axios.get(ip + '/isbn/' + req.params.id);
         const data = resp.data;
-        if (req.headers["user-agent"].includes("Mobile")) {
-            if (data.genre == 'non-fiction') {
+       /* if (req.headers["user-agent"].includes("Mobile")) {
+            if (data.genre == 'non-fiction' || data.genre == 'non fiction' ) {
                 data.genre = 3;
             }
-        }
+        }*/
         console.log(data);
         if (data.code) {
             const code = data.code;
             delete data.code;
             res.status(code).send(data);
         } else {
+            if (req.headers["user-agent"].includes("Mobile")) {
+                if (data.genre == 'non-fiction' || data.genre == 'non fiction' ) {
+                    data.genre = 3;
+                }
+            }
             res.status(200).send(data);
         }
     }

@@ -1,19 +1,19 @@
   apiVersion: apps/v1
   kind: Deployment
   metadata:
-    name: customer-service-deployment
+    name: customer-bff-deployment
     namespace: customer-service-app
     labels:
-      app: customer-service-app
+      app: customer-bff-app
   spec:
     replicas: 1
     selector:
       matchLabels:
-        app: customer-service-app
+        app: customer-bff-app
     template:
       metadata:
         labels:
-          app: customer-service-app
+          app: customer-bff-app
       spec:
         affinity:
           nodeAffinity:
@@ -27,7 +27,7 @@
                         - arm64
         containers:
           - name: customerapi
-            image: public.ecr.aws/o0j8b8u8/diss-a3-ecr:customerbff
+            image: public.ecr.aws/o0j8b8u8/diss-a3:customerbff
             ports:
               - containerPort: 80
             imagePullPolicy: IfNotPresent

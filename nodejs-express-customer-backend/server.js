@@ -13,6 +13,6 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 3000;
 require("./app/routes/customers.routes.js")(app);
 app.listen(PORT, () => {
-    console.log('Server is listening on port ${PORT}.');
+    console.log(`Server is listening on port ${PORT}.`);
 });
 

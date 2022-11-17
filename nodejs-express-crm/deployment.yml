@@ -27,7 +27,7 @@
                         - arm64
         containers:
           - name: crmapi
-            image: public.ecr.aws/o0j8b8u8/diss-a3-ecr:crmapi
+            image: public.ecr.aws/o0j8b8u8/diss-a3:crmapi
             ports:
               - containerPort: 3000
             imagePullPolicy: IfNotPresent

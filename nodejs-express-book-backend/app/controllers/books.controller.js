@@ -1,5 +1,6 @@
 const Book = require("../models/books.model.js");
 const axios = require('axios');
+const http = require('http');
 axios.defaults.timeout = 60000;
 let previousResponse = 200;
 let previousTime = Date.now();
@@ -120,7 +121,7 @@ async function circuitBreaker(req, res) {
             res.status(503).send(errorMessage);
             console.log('first');
         } else {
-            const apiCall = await axios
+            /*const apiCall = await axios
                 .get('http://54.164.102.184:80/recommended-titles/isbn/'+req.params.ISBN)
                 .then(function(response) {
                     let currentTime = Date.now();
@@ -143,7 +144,25 @@ async function circuitBreaker(req, res) {
                 })
                 .then(function(response) {
 
-                });
+                });*/
+            const options = {
+                hostname: '54.164.102.184:80',
+                port: 80,
+                path: 'recommended-titles/isbn/'+req.params.ISBN,
+                method: 'GET',
+            };
+            const request = http.request(options, response => {
+
+                if (response.statusCode == 204) {
+                    res.status(204).send();
+                }
+                response.on('data', d => {
+                res.status(response.statusCode).send(d)});
+            });
+            request.on('timeout', () => {
+                res.status(504).send();
+            });
+            request.end();
         }
 }
 module.exports.circuitBreaker = circuitBreaker;

@@ -1,6 +1,7 @@
 const axios = require('axios');
 const jwtDecoder = require('jwt-decode');
-const ip = 'http://52.23.79.76:3000/customers'
+const ip = 'http://customer-service:3000/customers'
+//const ip = 'http://localhost:3000/customers'
 
 exports.create = (req, res) => {
 
@@ -127,23 +128,27 @@ exports.retrieveByUserID = (req, res) => {
 function authorization(req) {
     var header = req.headers.authorization;
     console.log(header);
-    var encoded = header.split(" ")[1];
-    console.log(encoded);
-    var decoded = jwtDecoder(encoded);
-    console.log(decoded);
-    var subs = ["starlord", "gamora", "drax", "rocket", "groot"];
-    var exp = new Date(decoded.exp);
-    var iss = decoded.iss;
-    const today = new Date();
-    if (decoded.sub) {
-        if (subs.includes(decoded.sub)) {
-            console.log("sub pass");
-            if (Object.prototype.toString.call(exp) === "[object Date]" && !isNaN(exp) && exp > today) {
-                if (iss == 'cmu.edu') {
-                    return true;
+    if (!header) {
+        return false;
+    } else {
+        var encoded = header.split(" ")[1];
+        console.log(encoded);
+        var decoded = jwtDecoder(encoded);
+        console.log(decoded);
+        var subs = ["starlord", "gamora", "drax", "rocket", "groot"];
+        var exp = new Date(decoded.exp);
+        var iss = decoded.iss;
+        const today = new Date();
+        if (decoded.sub) {
+            if (subs.includes(decoded.sub)) {
+                console.log("sub pass");
+                if (Object.prototype.toString.call(exp) === "[object Date]" && !isNaN(exp) && exp > today) {
+                    if (iss == 'cmu.edu') {
+                        return true;
+                    }
                 }
             }
         }
+        return false;
     }
-    return false;
 }
