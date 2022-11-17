@@ -1,4 +1,4 @@
-# Cloud-Native-Data-Intesive-Application
+# Cloud-Native-Data-Intensive-Application
 
 This project is part of the course 17647 - Data Intensive and Scalable Systems taught by Prof. Paulo Merson, at Carnegie Mellon University. 
 The project uses design strategies and patterns commonly used in distributed systems like - Circuit Breaker & Backend For Frontend to implement a Book Management System. 
