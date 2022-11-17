@@ -1,7 +1,7 @@
 const axios = require('axios');
 const jwtDecoder = require('jwt-decode');
-const ip = 'http://customer-service:3000/customers'
-//const ip = 'http://localhost:3000/customers'
+const ip = ''
+
 
 exports.create = (req, res) => {
 
